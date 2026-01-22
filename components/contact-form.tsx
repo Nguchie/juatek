@@ -38,30 +38,14 @@ export default function ContactForm() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
-    const form = e.currentTarget
-    const formDataToSubmit = new FormData(form)
-    
-    try {
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formDataToSubmit as any).toString(),
-      })
-      
-      if (response.ok) {
-        setSubmitted(true)
-        setFormData({ name: "", email: "", company: "", service: "", budget: "", message: "" })
-        setTimeout(() => {
-          setSubmitted(false)
-        }, 3000)
-      }
-    } catch (error) {
-      console.error("Form submission error:", error)
-      alert("There was an error submitting the form. Please try again.")
-    }
+    console.log("Form submitted:", formData)
+    setSubmitted(true)
+    setTimeout(() => {
+      setFormData({ name: "", email: "", company: "", service: "", budget: "", message: "" })
+      setSubmitted(false)
+    }, 3000)
   }
 
   return (
@@ -72,27 +56,7 @@ export default function ContactForm() {
           <p className="text-foreground/70 text-sm">Let's discuss how we can help your business grow</p>
         </div>
 
-        <form
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          onSubmit={handleSubmit}
-          className="space-y-6"
-        >
-          {/* Hidden form-name field for Netlify */}
-          <input type="hidden" name="form-name" value="contact" />
-          
-          {/* Honeypot field for spam protection */}
-          <div className="hidden">
-            <label>
-              Don't fill this out if you're human: <input name="bot-field" />
-            </label>
-          </div>
-          
-          {/* Hidden inputs for Select values (Netlify needs native form inputs) */}
-          <input type="hidden" name="service" value={formData.service} />
-          <input type="hidden" name="budget" value={formData.budget} />
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium text-foreground">
