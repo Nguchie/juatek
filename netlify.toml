@@ -1,8 +1,6 @@
+[# Static export build for Next.js]
 [build]
-  command = "npm run deploy:diagnose && npm run build"
-  publish = ".next"
+  command = "npm run build"
+  publish = "out"
 
-# Use Netlify's Next.js runtime (handles SSR, app router, and dynamic routes)
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
 
