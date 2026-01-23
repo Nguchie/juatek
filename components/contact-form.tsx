@@ -21,8 +21,6 @@ export default function ContactForm() {
     message: "",
   })
 
-  const [submitted, setSubmitted] = useState(false)
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
@@ -38,16 +36,6 @@ export default function ContactForm() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setFormData({ name: "", email: "", company: "", service: "", budget: "", message: "" })
-      setSubmitted(false)
-    }, 3000)
-  }
-
   return (
     <section id="contact" className="py-20 px-6 bg-background">
       <div className="max-w-2xl mx-auto">
@@ -56,7 +44,23 @@ export default function ContactForm() {
           <p className="text-foreground/70 text-sm">Let's discuss how we can help your business grow</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          className="space-y-6"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p className="hidden">
+            <label>
+              Don’t fill this out if you’re human: <input name="bot-field" />
+            </label>
+          </p>
+
+          {/* Ensure custom selects submit values */}
+          <input type="hidden" name="service" value={formData.service} />
+          <input type="hidden" name="budget" value={formData.budget} />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -166,7 +170,7 @@ export default function ContactForm() {
             type="submit"
             className="w-full px-6 py-3 bg-accent text-primary font-semibold rounded-lg hover:opacity-90 transition-opacity"
           >
-            {submitted ? "Message Sent!" : "Send Message"}
+            Send Message
           </button>
         </form>
       </div>
