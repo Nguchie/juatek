@@ -38,14 +38,9 @@ export default function ContactForm() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
+  const handleSubmit = () => {
+    // Let the browser perform a normal POST so Netlify can record the submission
     setSubmitted(true)
-    setTimeout(() => {
-      setFormData({ name: "", email: "", company: "", service: "", budget: "", message: "" })
-      setSubmitted(false)
-    }, 3000)
   }
 
   return (
@@ -118,6 +113,7 @@ export default function ContactForm() {
                 Service
               </label>
               <Select
+                name="service"
                 value={formData.service}
                 onValueChange={(value) => handleSelectChange("service", value)}
                 required
@@ -137,6 +133,7 @@ export default function ContactForm() {
                 Budget
               </label>
               <Select
+                name="budget"
                 value={formData.budget}
                 onValueChange={(value) => handleSelectChange("budget", value)}
                 required
