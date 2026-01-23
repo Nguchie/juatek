@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "deploy:diagnose": "node -e \"const fs=require('fs'); const path=require('path'); console.log('node',process.version); console.log('cwd',process.cwd()); console.log('has app dir',fs.existsSync('app')); console.log('has pages dir',fs.existsSync('pages')); console.log('next.config.mjs',fs.existsSync('next.config.mjs')?'present':'missing'); console.log('package manager lock',fs.existsSync('pnpm-lock.yaml')?'pnpm-lock.yaml':fs.existsSync('package-lock.json')?'package-lock.json':'none'); console.log('listing .next (if exists)'); try{console.log(fs.readdirSync('.next').slice(0,50))}catch(e){console.log('no .next yet')}\"",
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",

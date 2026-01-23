@@ -35,11 +35,11 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Image box on the right */}
           <div className="hidden md:flex justify-end">
-            <div className="w-full h-80 bg-secondary rounded-xl overflow-hidden shadow-lg">
+            <div className="relative w-full h-80 bg-secondary rounded-xl overflow-hidden shadow-lg">
               <Image
-                src="/images/hero-image.jpg"
+                src="/herosection.png"
                 alt="Team working on software development"
                 fill
                 className="object-cover"
