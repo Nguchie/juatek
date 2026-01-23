@@ -139,6 +139,10 @@ const projectDetails = {
   },
 }
 
+export function generateStaticParams() {
+  return Object.keys(projectDetails).map((slug) => ({ slug }))
+}
+
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
   const resolvedParams = params instanceof Promise ? await params : params
   const project = projectDetails[resolvedParams.slug as keyof typeof projectDetails]
