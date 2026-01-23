@@ -1,4 +1,4 @@
-[# Static export build for Next.js]
+# Static export build for Next.js
 [build]
   command = "npm run build"
   publish = "out"
